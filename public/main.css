@@ -28,11 +28,17 @@ body {
 }
 .btn:hover {
     box-shadow: 5px 3px 7px;
-    font-size: 85%;
+    font-size: 82%;
 }
 .btn:active {
     background: blue;
     color: white;
+}
+.registrarse:hover {
+    font-size: 102%;
+    box-shadow: 3px 3px;
+    border-radius: 5px;
+    text-decoration: none;
 }
 :placeholder-shown{
     text-align: center;

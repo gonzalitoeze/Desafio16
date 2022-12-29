@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
         res.send(`Bienvenido ${nombre}!`);
     }
 });
-app.get('/Admin', auth, (req, res) => {
+app.get('/Admin', (req, res) => {
     const nombre = req.query.nombre;
     if (!nombre) {
         return res.status(400).send('Nombre no especificado');
@@ -82,7 +82,7 @@ app.post('/register', (req, res) => {
     });
 });
 
-app.post('/auth', (req, res) => {
+app.post('/auth', auth, (req, res) => {
     const {username, password} = req.body;
 
     user.findOne({username}, (err, user) => {
