@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "timestamp": 123456,
+        "nombre": "Victoria Arduino MYG85 Negro" ,
+        "descripcion": "La tecnología patentada Mythos que responde a las necesidades de los profesionales del café modernos: máxima consistencia, cero residuos y facilidad de mantenimiento.",
+        "codigo": 123,
+        "foto": "https://www.coffeeitalia.es/wp-content/uploads/2022/04/MY-G85-1.jpg.webp",
+        "precio": "$3450",
+        "stock": 5 
+    }
+]
