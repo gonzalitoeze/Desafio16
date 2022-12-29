@@ -20,7 +20,7 @@ const advanceOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 app.use(cookieParser());
 app.use(session({
     store: mongoStore.create({
-        mongoUrl: 'mongodb+srv://root:root@cluster0.4tmad3s.mongodb.net/sesiones?retryWrites=true&w=majority',
+        mongoUrl: 'mongodb+srv://root:root@cluster0.4tmad3s.mongodb.net/usuarios?retryWrites=true&w=majority',
         mongoOptions: advanceOptions,
         ttl: 600
     }),
@@ -29,6 +29,7 @@ app.use(session({
     saveUninitialized: false
 }))
 
+//función middleware
 const auth = (req, res, next) => {
     if (req.session.nombre == 'Juan') {
         return next();
@@ -37,7 +38,34 @@ const auth = (req, res, next) => {
 };
 
 app.get('/', (req, res) => {
+    const nombre = req.query.nombre;
+    if (!nombre) {
+        return res.status(400).send('Nombre no especificado');
+    }
 
+    if(req.session.contador) {
+        req.session.contador++;
+        res.send(`Hola ${nombre} has iniciado sesión ${req.session.contador} veces`);
+    } else {
+        req.session.nomre = nombre;
+        req.session.contador = 1;
+        res.send(`Bienvenido ${nombre}!`);
+    }
+});
+app.get('/Admin', auth, (req, res) => {
+    const nombre = req.query.nombre;
+    if (!nombre) {
+        return res.status(400).send('Nombre no especificado');
+    }
+
+    if(req.session.contador) {
+        req.session.contador++;
+        res.send(`Hola ${nombre} has iniciado sesión ${req.session.contador} veces`);
+    } else {
+        req.session.nomre = nombre;
+        req.session.contador = 1;
+        res.send(`Bienvenido ${nombre}!`);
+    }
 });
 
 app.post('/register', (req, res) => {
@@ -62,7 +90,7 @@ app.post('/auth', (req, res) => {
             res.status(500).send('ERROR AL AUTENTICAR EL USUARIO')
         } else if (!user) {
             res.status(500).send('EL USUARIO NO EXISTE')
-        } else {
+        } /* else {
             user.isCorrectPassword(password, (err, result) => {
                 if (err) {
                     res.status(500).send('ERROR AL AUTENTICAR')
@@ -72,13 +100,12 @@ app.post('/auth', (req, res) => {
                     res.status(500).send('USUARIO Y/O CONTRASEÑA INCORRECTOS')
                 }
             });
-        }
+        } */
     });
-})
+});
 
 const port = 8080;
 const server = app.listen(port, () => {
     console.log(`Server listening from: ${server.address().port}`)
 });
-
 module.export = app;

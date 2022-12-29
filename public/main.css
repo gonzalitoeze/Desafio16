@@ -31,7 +31,8 @@ body {
     font-size: 85%;
 }
 .btn:active {
-    background: linear-gradient(90deg, rgb(233, 20, 126) 100%, rgb(167, 41, 160) 35%,  rgb(189, 2, 247) 0%);
+    background: blue;
+    color: white;
 }
 :placeholder-shown{
     text-align: center;
