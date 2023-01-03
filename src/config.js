@@ -1,4 +1,4 @@
-export default {
+/* export default {
     fileSystem: {
         path: './db'
     },
@@ -23,4 +23,42 @@ export default {
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ecommerce%40ecommerce-371822.iam.gserviceaccount.com"
     },
-  }
+  } */
+
+
+// import { config } from "dotenv";
+// config();
+
+// export const PORT = process.env.PORT || 8080;
+// export const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/usuarios";
+
+export default {
+    PORT: process.env.PORT || 8080,
+    mongoLocal: {
+        client: 'mongodb',
+        cnxStr: 'mongodb://localhost:27017/ecommerce'
+    },
+    mongoRemote: {
+        client: 'mongodb',
+        cnxStr: 'mongodb+srv://root:root@cluster0.7yey2qr.mongodb.net/ecommerce?retryWrites=true&w=majority'
+    },
+    sqlite3: {
+        client: 'sqlite3',
+        connection: {
+            filename: `./db/ecommerce.sqlite`
+        },
+        useNullAsDefault: true
+    },
+    mariaDb: {
+        client: 'mysql',
+        connection: {
+            host: 'localhost',
+            user: '',
+            password: '',
+            database: ''
+        }
+    },
+    fileSystem: {
+        path: './db'
+    }
+}

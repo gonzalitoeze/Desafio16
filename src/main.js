@@ -1,28 +1,54 @@
 import express from 'express';
-//IMPORTAR RUTAS
-import { rutaProducto } from './routes/productos.js';
-import { rutaCarrito } from './routes/carrito.js';
-const app = express();
-const port = process.env.PORT || 8080;
+import config from './config.js';
 
-//LINEAS USO DE JSON
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+import { Server as HttpServer } from 'http'
+import { Server as Socket } from 'socket.io'
 
-app.use(express.static(path.join(__dirname, 'public')));
+import authWebRouter from './routes/'
+import homeWebRouter from './routes/'
+import productosApiRouter from './routes/'
 
-app.use('/api/productos', rutaProducto);
-app.use('/api/carrito', rutaCarrito);
+import addProductosHandlers from './routers/ws/productos.js'
+import addMensajesHandlers from './routers/ws/mensajes.js'
 
-app.use((req, res, next) => {
-    if (!req.route) {
-        res.status(404).send({ error: -2, descr: `No se encuentra la ruta ${req.url}`});
-    } else {
-        next();
-    }
-})
+//TO DO: Importar el session-mongo
+//Configurar el session
 
-const server = app.listen(port, () => {
-    console.log(`Server listening: ${server.address().port}`)
+
+// instancio servidor, socket y api
+
+const app = express()
+const httpServer = new HttpServer(app)
+const io = new Socket(httpServer)
+
+// configuro el socket
+
+io.on('connection', async socket => {
+    // console.log('Nuevo cliente conectado!');
+    addProductosHandlers(socket, io.sockets)
+    addMensajesHandlers(socket, io.sockets)
 });
-server.on('error', error => console.log(`error ${error}`));
+
+// configuro el servidor
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public'))
+
+app.set('view engine', 'ejs');
+
+// rutas del servidor API REST
+
+app.use(productosApiRouter)
+
+// rutas del servidor web
+
+app.use(authWebRouter)
+app.use(homeWebRouter)
+
+// inicio el servidor
+
+const connectedServer = httpServer.listen(config.PORT, () => {
+    console.log(`Servidor http escuchando en el puerto ${connectedServer.address().port}`)
+})
+connectedServer.on('error', error => console.log(`Error en servidor ${error}`))
