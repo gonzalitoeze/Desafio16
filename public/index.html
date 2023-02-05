@@ -6,27 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Productos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="container-fluid position-fixed navbar-dark bg-dark" style="margin-top: 5%; padding-left: 10%; padding-right: 10%; height: 60px;">
-      <a class="navbar-brand" href="#Form">Formulario</a>
-      <a class="navbar-brand" href="#Vista">Vista de Productos</a>
-      <a class="navbar-brand" href="#chat">ChatMessenger</a>
-    </div>
+  <header>
+    <nav>
+      <div class="navbar">
+        <a class="navbar-brand" href="#Form">Formulario</a>
+        <a class="navbar-brand" href="#Vista">Vista de Productos</a>
+        <a class="navbar-brand" href="#chat">ChatMessenger</a>
+      </div>
   </nav>
-
+  </header>
     <a name="Form"></a>
-    <header class="container bg-dark" style="margin-top: 10%; margin-bottom: 5%; padding-bottom: 2%; padding-top: 2%; padding-left: 2%; padding-right: 2%; border-radius: 15px; color: white;">
-      <h2>Formulario de productos</h2>
-
-      <h3 class="container" style="padding-top: 1%;">Ingresar producto</h3>
-      
+    <section>
+      <div class="text">
+        <h2>Formulario de productos</h2>
+        <h3>Ingresar producto</h3>
+      </div>
       <div class="container">
-        
         <form onsubmit="return addProductos(this)" id="formAgregarProducto">
           <label for="nombre"></label>
           <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del producto">
@@ -38,42 +39,41 @@
         </form>
 
       </div>
-    </header>
+    </section>
 
     <hr>
 
     <a name="Vista"></a>
-    <div class="container bg-dark" style="margin-top: 5%; margin-bottom: 2%; padding-bottom: 2%; padding-top: 2%; padding-left: 2%; border-radius: 15px; color: white;">
+    <section>
+      <div class="text">
         <h2>Vista de Productos</h2>
+      </div>
         <table id="productos" class="container">
           <tr>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Foto</th>
           </tr>
-            <!-- <tr>
-              <td>{{nombre}}</td>
-              <td>{{precio}}</td>
-              <td><img src="{{thumbnail}}" alt=""></td>
-            </tr> -->
+              <!-- <tr>
+                <td>{{nombre}}</td>
+                <td>{{precio}}</td>
+                <td><img src="{{thumbnail}}" alt=""></td>
+              </tr> -->
         </table>
         <br>
         <button class="btn btn-danger btn-sm" onclick="">Eliminar producto</button>
-    </div>
-    <br>
-
+      </div>
+    </section>
     <hr>
-
-    <section class="container bg-dark" style="margin-top: 5%; margin-bottom: 6%; padding-bottom: 2%; padding-top: 2%; padding-left: 2%; padding-right: 2%; border-radius: 15px; color: white;">
-      <h2>Centro de Mensajería</h2>
-      <h3 class="container" style="padding-top: 1%; padding-bottom: 2%;">Ingresar email y mensaje</h3>
+    <section>
+      <div class="text">
+        <h2>Centro de Mensajería</h2>
+        <h3>Ingresar email y mensaje</h3>
+      </div>
       <a name="chat"></a>
-
       <div id="mensajes">
       </div>
-
       <div class="container">
-      
         <form onsubmit="return addMessage(this)" id="formPublicarMensaje">
           <input type="text" id="inputEmail" placeholder="Em@il" class="form-control"></br>
           <input type="text" id="inputNombre" placeholder="Nombre" class="form-control"></br>
@@ -82,14 +82,13 @@
           <input type="text" id="inputAlias" placeholder="Alias" class="form-control"></br>
           <input type="text" id="inputAvatar" placeholder="Avatar" class="form-control"></br>
           <hr>
-          <input type="text" id="inputMensaje" placeholder="Ingresá tu mensaje" class="form-control"/><br>
-          <button type="submit" class="btn btn-success" id="btnEnviar">Enviar</button>
+          <input type="text" id="inputMensaje" placeholder="Ingresá tu mensaje" class="form-control"/></br>
+          <button type="submit" class="btn btn-success" id="btnEnviar">Enviar</button><br>
         </form>
-        
       </div>
     </section>
 
     <script src="js/main.js"></script>
-
+    <link rel="stylesheet" href="style.css">
 </body>
 </html>
